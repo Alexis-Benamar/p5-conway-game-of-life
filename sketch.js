@@ -1,7 +1,7 @@
 let grid, randomFillButton, sizeMulSlider
 let canvasSize = 512
-let cols = 5
-let rows = 5
+let cols = 32
+let rows = 32
 let run = false
 let fps = 0
 
@@ -10,13 +10,14 @@ function setup() {
   grid = new Grid(rows, cols, canvasSize)
   
   randomFillButton = createButton('random fill').mousePressed(fillButton)
-  startButton = createButton('run').mousePressed(start)
+  runButton = createButton('run').mousePressed(runGame)
 }
 
 function draw() {
-  run ? background(100, 255, 100) : background(240)
+  background(255)
   grid.show()
-  if(run && !(fps % 30)) {
+  if(run && !(fps % 3)) {
+    grid.update()
   }
   fps++
 }
@@ -33,7 +34,9 @@ function fillButton() {
   grid.fillRandom()
 }
 
-function start() {
-  grid.update()
-  // run = !run
+function runGame() {
+  run = !run
+  runButton.remove()
+  runButton = run ? createButton('stop') : createButton('run')
+  runButton.mousePressed(runGame)
 }

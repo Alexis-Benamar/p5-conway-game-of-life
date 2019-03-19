@@ -32,18 +32,26 @@ class Grid {
           next[i][j] = this.cells[i][j]
         } else {
           let neighbors = this.countNeighbors(this.cells, i, j)
-          console.log('%s %s %s', i, j, neighbors)
-
+          if (!(this.cells[i][j].alive) && neighbors == 3) {
+            next[i][j] = new Cell(i, j, canvasSize / cols)
+            next[i][j].alive = true
+          } else if (this.cells[i][j].alive && (neighbors < 2 || neighbors > 3)) {
+            next[i][j] = new Cell(i, j, canvasSize / cols)
+            next[i][j].alive = false
+          } else {
+            next[i][j] = this.cells[i][j]
+          }
         }
       }
     }
+    this.cells = [...next]
   }
   
   countNeighbors(grid, x, y) {
     let sum = 0
-    for(let i = -1; i < 1; i++) {
-      for(let j = -1; j < 1; j++) {
-          sum += grid[x + i][y + j].alive ? 1 : 0
+    for(let i = x-1; i <= x+1; i++) {
+      for(let j = y-1; j <= y+1; j++) {
+        sum += grid[i][j].alive ? 1 : 0
       }
     }
     sum -= grid[x][y].alive ? 1 : 0
