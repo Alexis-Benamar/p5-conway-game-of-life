@@ -3,7 +3,7 @@ class Grid {
   rows;
   cols;
 
-  constructor(rows, cols, canvasSize) {
+  constructor(rows, cols, cellPxSize) {
     this.rows = rows
     this.cols = cols
 
@@ -14,7 +14,7 @@ class Grid {
 
     for(let i = 0; i < cols; i++) {
       for(let j = 0; j < rows; j++) {
-        this.cells[i][j] = new Cell(i, j, canvasSize / cols)
+        this.cells[i][j] = new Cell(i, j, cellPxSize)
       }
     }
   }
@@ -33,10 +33,10 @@ class Grid {
         } else {
           let neighbors = this.countNeighbors(this.cells, i, j)
           if (!(this.cells[i][j].alive) && neighbors == 3) {
-            next[i][j] = new Cell(i, j, canvasSize / cols)
+            next[i][j] = new Cell(i, j, cellPxSize)
             next[i][j].alive = true
           } else if (this.cells[i][j].alive && (neighbors < 2 || neighbors > 3)) {
-            next[i][j] = new Cell(i, j, canvasSize / cols)
+            next[i][j] = new Cell(i, j, cellPxSize)
             next[i][j].alive = false
           } else {
             next[i][j] = this.cells[i][j]
