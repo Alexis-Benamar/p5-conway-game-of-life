@@ -5,3 +5,17 @@ html, body {
 canvas {
   display: block;
 }
+
+.label {
+  display: inline-block;
+  margin: 0 auto;
+  min-width: 50px;
+  border: 2px solid transparent;
+}
+.grid-input {
+  width: 50px;
+}
+
+.hidden {
+  display: none
+}
