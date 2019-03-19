@@ -1,25 +1,23 @@
-let grid, randomFillButton, sizeMulSlider
+let grid, randomFillButton, runButton, fpsSlider
 let canvasSize = 512
 let cols = 32
 let rows = 32
 let run = false
-let fps = 0
 
 function setup() {
-  createCanvas(canvasSize, canvasSize)
   grid = new Grid(rows, cols, canvasSize)
-  
   randomFillButton = createButton('random fill').mousePressed(fillButton)
   runButton = createButton('run').mousePressed(runGame)
+  fpsSlider = createSlider(1, 60, 15, 1)
+  createCanvas(canvasSize, canvasSize)
+  createP('stopped').addClass('text')
 }
 
 function draw() {
-  background(255)
+  frameRate(fpsSlider.value())
+  background(250)
+  if(run) grid.update()
   grid.show()
-  if(run && !(fps % 3)) {
-    grid.update()
-  }
-  fps++
 }
 
 function mousePressed() {
@@ -36,7 +34,6 @@ function fillButton() {
 
 function runGame() {
   run = !run
-  runButton.remove()
-  runButton = run ? createButton('stop') : createButton('run')
-  runButton.mousePressed(runGame)
+  gameState = select('.text')
+  gameState.html(run ? 'running...' : 'stopped')
 }
