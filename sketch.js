@@ -15,14 +15,17 @@ function setup() {
   createP('rows').addClass('label')
   createP('cell size (px)').addClass('label')
   createSpan('<br>')
+
   colsInput = createInput().addClass('grid-input')
   rowsInput = createInput().addClass('grid-input')
   cellSizeInput = createInput().addClass('grid-input')
   createSpan('<br>')
+  
   createGridButton = createButton('generate grid').mousePressed(genGrid)
   randomFillButton = createButton('random fill').mousePressed(fillButton)
   runButton = createButton('run').mousePressed(runGame)
   fpsSlider = createSlider(1, 30, 15, 1)
+  
   createCanvas(0, 0)
   gameStateText = createP('stopped').addClass('game-state hidden')
 }
@@ -43,6 +46,7 @@ function genGrid() {
     cellPxSize = abs(round(cellSizeInput.value()))
     canvasHeight =  rows * cellPxSize
     canvasWidth = cols * cellPxSize
+    
     grid = new Grid(rows, cols, cellPxSize)
     resizeCanvas(canvasWidth, canvasHeight)
     gameStateText.removeClass('hidden')
