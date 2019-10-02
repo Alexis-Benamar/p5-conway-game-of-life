@@ -1,21 +1,10 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: rgb(8, 8, 8);
 }
+
 canvas {
   display: block;
-}
-
-.label {
-  display: inline-block;
   margin: 0 auto;
-  min-width: 50px;
-  border: 2px solid transparent;
-}
-.grid-input {
-  width: 50px;
-}
-
-.hidden {
-  display: none
 }

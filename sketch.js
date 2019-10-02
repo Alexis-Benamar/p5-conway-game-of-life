@@ -1,35 +1,35 @@
+const FPS_RATE = 12
+const CELL_PX_SIZE = 32
+const CELL_COLOR = 250
+const BG_COLOR = 8
+let CELL_RING = true
+
 let grid
-let createGridButton, randomFillButton, runButton
-let colsInput, rowsInput, cellSizeInput
-let fpsSlider
-let cellPxSize
 let cols
 let rows
-let canvasHeight
-let canvasWidth
-let run = false
-let gameStateText
+let run = true
 
 function setup() {
-  createP('cols').addClass('label')
-  createP('rows').addClass('label')
-  createP('cell size (px)').addClass('label')
-  createSpan('<br>')
-  colsInput = createInput().addClass('grid-input')
-  rowsInput = createInput().addClass('grid-input')
-  cellSizeInput = createInput().addClass('grid-input')
-  createSpan('<br>')
-  createGridButton = createButton('generate grid').mousePressed(genGrid)
-  randomFillButton = createButton('random fill').mousePressed(fillButton)
-  runButton = createButton('run').mousePressed(runGame)
-  fpsSlider = createSlider(1, 30, 15, 1)
-  createCanvas(0, 0)
-  gameStateText = createP('stopped').addClass('game-state hidden')
+  createCanvas((CELL_PX_SIZE * Math.floor(windowWidth / CELL_PX_SIZE)), (CELL_PX_SIZE * Math.floor(windowHeight / CELL_PX_SIZE)))
+  cols = width / CELL_PX_SIZE
+  rows = height / CELL_PX_SIZE
+  genGrid()
+  console.log(`
+    Welcome !
+    This is an adaptation of the infamous Conway's Game of Life.
+    
+    Controls:
+    * S: stop / resume
+    * R: random grid
+    * E: empty grid
+    * O: cell style
+    * Mouse Click: cell toggle
+  `)
 }
 
 function draw() {
-  frameRate(fpsSlider.value())
-  background(250)
+  frameRate(FPS_RATE)
+  background(BG_COLOR)
   if(grid !== undefined) {
     if(run) grid.update()
     grid.show()
@@ -37,20 +37,14 @@ function draw() {
 }
 
 function genGrid() {
-  if(rowsInput.value() !== '' && colsInput.value() !== '' && cellSizeInput.value() !== '') {
-    rows = abs(round(rowsInput.value()))
-    cols = abs(round(colsInput.value()))
-    cellPxSize = abs(round(cellSizeInput.value()))
-    canvasHeight =  rows * cellPxSize
-    canvasWidth = cols * cellPxSize
-    grid = new Grid(rows, cols, cellPxSize)
-    resizeCanvas(canvasWidth, canvasHeight)
-    gameStateText.removeClass('hidden')
-  }
+  grid = new Grid(rows, cols)
+  grid.fillRandom()
 }
 
 function mousePressed() {
-  if(grid !== undefined) {
+  if (run) {
+    console.warn('click only works when stopped !')
+  } else {
     grid.cells.forEach(rows => {
       rows.forEach(cell => {
         cell.clicked()
@@ -59,14 +53,30 @@ function mousePressed() {
   }
 }
 
+function keyPressed() {
+  switch(key) {
+    case 'r':
+      console.log('random fill')
+      grid.fillRandom()
+      break
+    case 's':
+      run = !run
+      console.log(run ? 'running...' : 'stopped')
+      break
+    case 'e':
+      console.log('emptied grid')
+      grid.fillEmpty()
+      break
+    case 'o':
+      CELL_RING = !CELL_RING
+      console.log(`cell style: ${CELL_RING ? 'ring' : 'circle'}`)
+    default:
+      break
+  }
+}
+
 function fillButton() {
   if(grid !== undefined) {
     grid.fillRandom()
   }
-}
-
-function runGame() {
-  run = !run
-  gameState = select('.game-state')
-  gameState.html(run ? 'running...' : 'stopped')
 }

@@ -4,7 +4,7 @@ class Cell {
   xPos;
   yPos;
   size;
-  sizeMultiplier = 0.8;
+  sizeMultiplier = 0.6;
   alive;
 
   constructor(x, y, size) {
@@ -17,9 +17,34 @@ class Cell {
   }
 
   show() {
-    noStroke()
-    this.alive ? fill(8) : fill(255)
-    ellipse(this.xPos + (this.size/2), this.yPos + (this.size / 2), this.size * this.sizeMultiplier, this.size * this.sizeMultiplier)
+    if (this.alive) {
+      if (CELL_RING) {
+        stroke(CELL_COLOR)
+        strokeWeight(4)
+        fill(BG_COLOR)
+        circle(
+          this.xPos + (this.size/2),
+          this.yPos + (this.size/2),
+          (this.size / 2) * this.sizeMultiplier
+        )
+      } else {
+        noStroke()
+        fill(CELL_COLOR)
+        ellipse(
+          this.xPos + (this.size/2),
+          this.yPos + (this.size / 2),
+          this.size * this.sizeMultiplier, this.size * this.sizeMultiplier
+        )
+      }
+    } else {
+      noStroke()
+      fill(BG_COLOR)
+      ellipse(
+        this.xPos + (this.size/2),
+        this.yPos + (this.size / 2),
+        this.size * this.sizeMultiplier, this.size * this.sizeMultiplier
+      )
+    }
   }
 
   clicked() {

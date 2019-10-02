@@ -3,7 +3,7 @@ class Grid {
   rows;
   cols;
 
-  constructor(rows, cols, cellPxSize) {
+  constructor(rows, cols) {
     this.rows = rows
     this.cols = cols
 
@@ -14,7 +14,7 @@ class Grid {
 
     for(let i = 0; i < cols; i++) {
       for(let j = 0; j < rows; j++) {
-        this.cells[i][j] = new Cell(i, j, cellPxSize)
+        this.cells[i][j] = new Cell(i, j, CELL_PX_SIZE)
       }
     }
   }
@@ -33,10 +33,10 @@ class Grid {
         } else {
           let neighbors = this.countNeighbors(this.cells, i, j)
           if (!(this.cells[i][j].alive) && neighbors == 3) {
-            next[i][j] = new Cell(i, j, cellPxSize)
+            next[i][j] = new Cell(i, j, CELL_PX_SIZE)
             next[i][j].alive = true
           } else if (this.cells[i][j].alive && (neighbors < 2 || neighbors > 3)) {
-            next[i][j] = new Cell(i, j, cellPxSize)
+            next[i][j] = new Cell(i, j, CELL_PX_SIZE)
             next[i][j].alive = false
           } else {
             next[i][j] = this.cells[i][j]
@@ -62,6 +62,14 @@ class Grid {
     this.cells.forEach(rows => {
       rows.forEach(cell => {
         cell.alive = random() >= 0.8 ? true : false
+      })
+    })
+  }
+
+  fillEmpty() {
+    this.cells.forEach(rows => {
+      rows.forEach(cell => {
+        cell.alive = false
       })
     })
   }
