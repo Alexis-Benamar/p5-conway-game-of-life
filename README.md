@@ -4,11 +4,15 @@
 
 This is a revamp of an old projet, made with [p5.js](https://p5js.org/). I discovered it thanks to [Daniel Shiffman](https://www.youtube.com/user/shiffman) and his amazing tutorials.
 
-## Setup:
+<div align=center>
+  <img src="https://raw.githubusercontent.com/alexis-benamar/p5-cgol/master/screenshot.png">
+</div>
+
+## Setup
 
 No setup required, just open the `index.html` file in your browser.
 
-## Controls:
+## Controls
 
 * **S**: stop / resume
 * **R**: random grid
