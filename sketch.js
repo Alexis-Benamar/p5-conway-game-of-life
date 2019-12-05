@@ -2,7 +2,7 @@ const FPS_RATE = 12
 const CELL_PX_SIZE = 32
 const CELL_COLOR = 250
 const BG_COLOR = 8
-let CELL_RING = true
+let CELL_RING = false
 
 let grid
 let cols
@@ -16,7 +16,7 @@ function setup() {
   genGrid()
   console.log(`
     Welcome !
-    This is an adaptation of the infamous Conway's Game of Life.
+    This is an adaptation of the famous Conway's Game of Life.
     
     Controls:
     * S: stop / resume
