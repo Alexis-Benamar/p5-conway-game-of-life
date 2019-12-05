@@ -5,7 +5,7 @@
 This is a revamp of an old projet, made with [p5.js](https://p5js.org/). I discovered it thanks to [Daniel Shiffman](https://www.youtube.com/user/shiffman) and his amazing tutorials.
 
 <div align=center>
-  <img src="https://raw.githubusercontent.com/alexis-benamar/p5-cgol/master/screenshot.png">
+  <img src="https://raw.githubusercontent.com/alexis-benamar/p5-conway-game-of-life/master/screenshot.png">
 </div>
 
 ## Setup
