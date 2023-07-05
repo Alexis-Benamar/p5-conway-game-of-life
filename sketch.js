@@ -1,7 +1,7 @@
 const FPS_RATE = 12
 const CELL_PX_SIZE = 32
-const CELL_COLOR = 250
-const BG_COLOR = 8
+let CELL_COLOR = 250
+let BG_COLOR = 8
 let CELL_RING = false
 
 let grid
@@ -9,20 +9,25 @@ let cols
 let rows
 let run = true
 
-function setup() {
+function initGame() {
   createCanvas((CELL_PX_SIZE * Math.floor(windowWidth / CELL_PX_SIZE)), (CELL_PX_SIZE * Math.floor(windowHeight / CELL_PX_SIZE)))
   cols = width / CELL_PX_SIZE
   rows = height / CELL_PX_SIZE
   genGrid()
+}
+
+function setup() {
+  initGame()
   console.log(`
     Welcome !
     This is an adaptation of the famous Conway's Game of Life.
-    
+
     Controls:
     * S: stop / resume
     * R: random grid
     * E: empty grid
     * O: cell style
+    * T: dark / white mode
     * Mouse Click: cell toggle
   `)
 }
@@ -49,7 +54,7 @@ function mousePressed() {
       rows.forEach(cell => {
         cell.clicked()
       })
-    });
+    })
   }
 }
 
@@ -70,6 +75,12 @@ function keyPressed() {
     case 'o':
       CELL_RING = !CELL_RING
       console.log(`cell style: ${CELL_RING ? 'ring' : 'circle'}`)
+      break
+    case 't':
+      const oldCellColor = CELL_COLOR
+      CELL_COLOR = BG_COLOR
+      BG_COLOR = oldCellColor
+      break
     default:
       break
   }
@@ -79,4 +90,8 @@ function fillButton() {
   if(grid !== undefined) {
     grid.fillRandom()
   }
+}
+
+function windowResized() {
+  initGame()
 }

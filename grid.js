@@ -1,7 +1,7 @@
 class Grid {
-  cells;
-  rows;
-  cols;
+  cells
+  rows
+  cols
 
   constructor(rows, cols) {
     this.rows = rows
@@ -27,7 +27,6 @@ class Grid {
 
     for(let i = 0; i < this.cols; i++) {
       for(let j = 0; j < this.rows; j++) {
-        
         if (i == 0 || i == cols - 1 || j == 0 || j == rows - 1) {
           next[i][j] = this.cells[i][j]
         } else {
@@ -46,7 +45,7 @@ class Grid {
     }
     this.cells = [...next]
   }
-  
+
   countNeighbors(grid, x, y) {
     let sum = 0
     for(let i = x-1; i <= x+1; i++) {
@@ -81,5 +80,4 @@ class Grid {
       })
     })
   }
-
 }

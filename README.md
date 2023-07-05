@@ -7,6 +7,7 @@ This is a revamp of an old projet, made with [p5.js](https://p5js.org/). I disco
 <div align=center>
   <img src="https://raw.githubusercontent.com/alexis-benamar/p5-conway-game-of-life/master/screenshot.png">
 </div>
+<br>
 
 ## Setup
 
@@ -18,4 +19,5 @@ No setup required, just open the `index.html` file in your browser.
 * **R**: random grid
 * **E**: empty grid
 * **O**: cell style
+* **T**: dark / white mode
 * **Mouse Click**: cell toggle

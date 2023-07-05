@@ -1,11 +1,11 @@
 class Cell {
-  x;
-  y;
-  xPos;
-  yPos;
-  size;
-  sizeMultiplier = 0.6;
-  alive;
+  x
+  y
+  xPos
+  yPos
+  size
+  sizeMultiplier = 0.6
+  alive
 
   constructor(x, y, size) {
     this.x = x
@@ -16,34 +16,38 @@ class Cell {
     this.alive = false
   }
 
-  show() {
-    if (this.alive) {
-      if (CELL_RING) {
-        stroke(CELL_COLOR)
-        strokeWeight(4)
-        fill(BG_COLOR)
-        circle(
-          this.xPos + (this.size/2),
-          this.yPos + (this.size/2),
-          (this.size / 2) * this.sizeMultiplier
-        )
-      } else {
-        noStroke()
-        fill(CELL_COLOR)
-        ellipse(
-          this.xPos + (this.size/2),
-          this.yPos + (this.size / 2),
-          this.size * this.sizeMultiplier, this.size * this.sizeMultiplier
-        )
-      }
+  drawCell(cellColor) {
+    if (CELL_RING) {
+      stroke(cellColor)
+      strokeWeight(4)
+      fill(BG_COLOR)
+      circle(
+        this.xPos + (this.size/2),
+        this.yPos + (this.size/2),
+        (this.size / 2) * this.sizeMultiplier
+      )
     } else {
       noStroke()
-      fill(BG_COLOR)
+      fill(cellColor)
       ellipse(
-        this.xPos + (this.size/2),
+        this.xPos + (this.size / 2),
         this.yPos + (this.size / 2),
         this.size * this.sizeMultiplier, this.size * this.sizeMultiplier
       )
+    }
+  }
+
+  show() {
+    if (this.alive) {
+      this.drawCell(CELL_COLOR)
+    } else {
+      if (
+        !run &&
+        mouseX > this.xPos && mouseX < this.xPos + this.size &&
+        mouseY > this.yPos && mouseY < this.yPos + this.size
+      ) {
+        this.drawCell(CELL_COLOR / 3)
+      }
     }
   }
 
